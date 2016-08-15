@@ -1,7 +1,6 @@
 package lessons.tests.vladimir.todomvc.smoke.v5;
 
 import com.codeborne.selenide.ElementsCollection;
-import com.codeborne.selenide.Screenshots;
 import com.codeborne.selenide.SelenideElement;
 import org.junit.Test;
 import org.openqa.selenium.By;
