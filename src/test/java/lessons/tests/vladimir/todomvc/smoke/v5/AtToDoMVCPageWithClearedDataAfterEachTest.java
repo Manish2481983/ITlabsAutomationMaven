@@ -9,7 +9,7 @@ import static com.codeborne.selenide.Selenide.open;
 /**
  * Created by vladimir on 15.08.16.
  */
-public class AtToDoMVCPageWithCliarDataAfterEachTest extends BaseTest{
+public class AtToDoMVCPageWithClearedDataAfterEachTest extends BaseTest{
 
     @Before
     public void testSetup() {

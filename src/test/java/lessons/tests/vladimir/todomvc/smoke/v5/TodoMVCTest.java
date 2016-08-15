@@ -15,7 +15,7 @@ import static com.codeborne.selenide.Selenide.*;
 /**
  * Created by Vladimir on 20.07.2016.
  */
-public class TodoMVCTest extends AtToDoMVCPageWithCliarDataAfterEachTest{
+public class TodoMVCTest extends AtToDoMVCPageWithClearedDataAfterEachTest {
 
     @Title("End 2 End test TasksLifeCycle")
     @Test
