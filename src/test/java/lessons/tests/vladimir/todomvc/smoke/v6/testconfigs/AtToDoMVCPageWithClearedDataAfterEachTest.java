@@ -1,4 +1,4 @@
-package lessons.tests.vladimir.todomvc.smoke.v6;
+package lessons.tests.vladimir.todomvc.smoke.v6.testconfigs;
 
 import org.junit.After;
 import org.junit.Before;

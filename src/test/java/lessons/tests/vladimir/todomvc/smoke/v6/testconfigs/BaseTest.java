@@ -1,4 +1,4 @@
-package lessons.tests.vladimir.todomvc.smoke.v6;
+package lessons.tests.vladimir.todomvc.smoke.v6.testconfigs;
 
 import com.codeborne.selenide.Screenshots;
 import com.google.common.io.Files;
