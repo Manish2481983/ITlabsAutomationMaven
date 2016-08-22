@@ -2,19 +2,19 @@ package lessons.tests.vladimir.todomvc.smoke.v6.helpers;
 
 import static com.codeborne.selenide.Selenide.executeJavaScript;
 import static com.codeborne.selenide.Selenide.refresh;
-import static lessons.tests.vladimir.todomvc.smoke.v6.helpers.GivenHelpers.Status.active;
+import static lessons.tests.vladimir.todomvc.smoke.v6.helpers.GivenHelpers.TaskStatus.ACTIVE;
 
 /**
  * Created by vladimir on 17.08.16.
  */
 public class GivenHelpers {
 
-    public enum Status {
-        active("false"), completed("true");
+    public enum TaskStatus {
+        ACTIVE("false"), COMPLETED("true");
 
         String description;
 
-        Status(String description) {
+        TaskStatus(String description) {
             this.description = description;
         }
 
@@ -25,33 +25,27 @@ public class GivenHelpers {
     }
 
     public static void given(String... texts){
-        given(active, texts);
+        given(ACTIVE, texts);
     }
 
-    public static void given(Status status, String... texts){
-        Task[] tasks = new Task[texts.length];
-
-        for(int i=0;i<texts.length;i++){
-            tasks[i]=newTask(status,texts[i]);
-        }
-
-        given(tasks);
+    public static void given(TaskStatus status, String... texts){
+        given(aTasks(status,texts));
     }
 
     public static class Task {
         private String text;
-        private Status status;
+        private TaskStatus status;
 
-        public Task(Status status, String text) {
+        public Task(TaskStatus status, String text) {
             this.status = status;
             this.text = text;
         }
 
         public Task(String text){
-            this(active,text);
+            this(ACTIVE,text);
         }
 
-        public Status getStatus(){
+        public TaskStatus getStatus(){
             return this.status;
         }
 
@@ -60,25 +54,34 @@ public class GivenHelpers {
         }
     }
 
-    public static Task newTask(Status status, String text){
+    public static Task aTask(TaskStatus status, String text){
         return new Task(status,text);
     }
 
-    public static Task newTask(String text){
+    public static Task aTask(String text){
         return new Task(text);
     }
 
+    public static Task[] aTasks(TaskStatus status, String... texts){
+        Task[] tasks = new Task[texts.length];
+
+        for(int i=0;i<texts.length;i++){
+            tasks[i]= aTask(status,texts[i]);
+        }
+        return tasks;
+    }
+
     public static void given(Task... tasks){
-        StringBuilder query=new StringBuilder();
+        StringBuilder tasksList=new StringBuilder();
 
         for(Task task: tasks){
-            if(query.length()!=0){
-                query.append(",");
+            if(tasksList.length()!=0){
+                tasksList.append(",");
             }
-            query.append(String.format("{\"completed\":%s,\"title\":\"%s\"}", task.getStatus(), task.getText()));
+            tasksList.append(String.format("{\"completed\":%s,\"title\":\"%s\"}", task.getStatus(), task.getText()));
         }
 
-        executeJavaScript("localStorage.setItem('todos-troopjs','["+query+"]')");
+        executeJavaScript("localStorage.setItem('todos-troopjs','["+tasksList+"]')");
         refresh();
     }
 

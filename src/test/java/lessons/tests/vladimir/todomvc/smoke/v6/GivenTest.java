@@ -3,12 +3,12 @@ package lessons.tests.vladimir.todomvc.smoke.v6;
 import static com.codeborne.selenide.CollectionCondition.exactTexts;
 import static com.codeborne.selenide.Selenide.$$;
 import static lessons.tests.vladimir.todomvc.smoke.v6.helpers.GivenHelpers.given;
-import static lessons.tests.vladimir.todomvc.smoke.v6.helpers.GivenHelpers.Status.active;
-import static lessons.tests.vladimir.todomvc.smoke.v6.helpers.GivenHelpers.Status.completed;
-import static lessons.tests.vladimir.todomvc.smoke.v6.helpers.GivenHelpers.newTask;
+import static lessons.tests.vladimir.todomvc.smoke.v6.helpers.GivenHelpers.TaskStatus.ACTIVE;
+import static lessons.tests.vladimir.todomvc.smoke.v6.helpers.GivenHelpers.TaskStatus.COMPLETED;
+import static lessons.tests.vladimir.todomvc.smoke.v6.helpers.GivenHelpers.aTask;
 
 import com.codeborne.selenide.ElementsCollection;
-import lessons.tests.vladimir.todomvc.smoke.v6.helpers.GivenHelpers.Task;
+import lessons.tests.vladimir.todomvc.smoke.v6.helpers.GivenHelpers;
 import lessons.tests.vladimir.todomvc.smoke.v6.testconfigs.AtToDoMVCPageWithClearedDataAfterEachTest;
 import org.junit.Test;
 import ru.yandex.qatools.allure.annotations.Step;
@@ -26,19 +26,19 @@ public class GivenTest extends AtToDoMVCPageWithClearedDataAfterEachTest {
 
     @Test
     public void testTasksWithActiveStatusForAll(){
-        given(active,"b","c","d");
+        given(ACTIVE,"b","c","d");
         assertTasksAre("b","c","d");
     }
 
     @Test
     public void testTasksWithCompletedStatusForAll(){
-        given(completed,"a","b","c");
+        given(COMPLETED,"a","b","c");
         assertTasksAre("a","b","c");
     }
 
     @Test
     public void testTasksWithDifferentStatusForEach(){
-        given(newTask(active,"jjj"), newTask(completed,"asdsa"), newTask("jhjhg"));
+        given(GivenHelpers.aTask(ACTIVE,"jjj"), GivenHelpers.aTask(COMPLETED,"asdsa"), aTask("jhjhg"));
         assertTasksAre("jjj","asdsa","jhjhg");
     }
 
